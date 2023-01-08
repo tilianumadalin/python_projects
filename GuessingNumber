@@ -1,0 +1,28 @@
+import random
+
+LEVEL_EASY = 10
+LEVEL_HARD = 5
+
+def gameplay():
+    number = random.randrange(1, 101)
+    print("Guess a number between 1 and 100!")
+    level = input("Choose 'easy' or 'hard\n")
+
+    if level == 'easy':
+        lifes = LEVEL_EASY
+    else:
+        lifes = LEVEL_HARD
+    answer = 0
+    while answer!=number:
+        answer = int(input("Guess the number...\n"))
+        lifes=lifes-1
+        print(f"You have {lifes} more tries!")
+        if answer>number:
+            print("The number is lower")
+        elif answer<number:
+            print("The number is higher")
+        if answer==number:
+            print("Congratz!")
+        if lifes==0:
+            return "You lost!"
+gameplay()
