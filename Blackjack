@@ -1,0 +1,67 @@
+cards=[2,3,4,5,6,7,8,9,10,10,10,10]
+human = []
+dealer = []
+player =[]
+stop_game=False
+
+#FUNCTIONS
+def show_hands():
+    print(f'Human has {human} and Dealer has [{dealer[0]}]')
+
+def draw_cards():
+    deal_card = random.choice(cards)
+    return deal_card
+
+def deal_cards():
+    for i in range(0,2):
+        human.append(draw_cards())
+    for i in range(0,2):
+        dealer.append(draw_cards())
+    show_hands()
+
+def player_draw(player):
+    player.append(draw_cards())
+    show_hands()
+
+def is_busted(player):
+    total=0
+    for card in player:
+        total=+card
+    if total>21:
+        return True
+
+def dealer_draws():
+    total=0
+    for card in dealer:
+        total=+card
+    while total<17:
+        draw_cards()
+        total=+draw_cards()
+        if total>21:
+            print("Dealer is busted. Player won")
+            stop_game==True
+
+play_game = input("Do you want to play BlackJack? type 'y' or 'n'\n")
+if play_game=='y':
+    deal_cards()
+    while stop_game==False:
+        draw_or_stop = input("Draw or Stop").lower()
+        if draw_or_stop=='draw':
+            player_draw(human)
+            total_human =0
+            for card in human:
+                total_human=+card
+            if total_human>21:
+                print("Player is busted. Dealer won!")
+                stop_game=True
+        else:
+            total_dealer = 0
+            while total_dealer<17:
+                player_draw(dealer)
+                for card in dealer:
+                    total_dealer=+card
+                if total_dealer>21:
+                    print("Dealer is busted. Player won!")
+                    stop_game=True
+else:
+    print("Maybe next time")"""
